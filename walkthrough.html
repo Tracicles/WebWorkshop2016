@@ -6,8 +6,6 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.1/angular.min.js"></script>
         
-        
-        
         <meta charset="utf-8"/>
         <title>Walkthrough App</title>
 
@@ -54,6 +52,37 @@
                 padding-left:10px;
                 padding-right:10px;
             }
+
+            .finishedPaged{
+
+                position:fixed;
+                top:0;
+                left:0;
+                right:0;
+                bottom:0;
+                background-color:beige;
+
+            }
+
+            .finishedPageButton{
+                display:inline-block;
+                height:30px;
+                line-height:30px;
+                text-align:center;
+                border: 1px solid lightgray;
+                border-radius: 5px;
+                background-color: black;
+                color:white;
+                transition: background-color 1.36s ease;
+                padding:0px 10px 0px 10px;
+                cursor:pointer;
+            }
+            .finishedPageButton:hover{
+                background-color:white;
+                color:blue;
+
+            }
+
         </style>
     </head>
     <body ng-app="walkthroughApp">
@@ -69,12 +98,19 @@
         <div id="Welcome" ng-show="currentPage == 1" class="animated fadeInLeft">
             <h1>Welcome!</h1>
             <h2>Web Dev 101</h2>
+            <br>
+            <h3>It's a whole new world!</h3>
+            <br>
+            <br>
             <h4>Vocabulary</h4>
             <ul>
                 <li>HTML</li>
                 <li>CSS</li>
                 <li>Javascript</li>
-                
+                <li>DOM</li>
+                <li>IDE</li>
+                <li>GIT (Version Control)</li>
+
             </ul>
         </div>
 
@@ -333,6 +369,24 @@
                         </script>
                     </textarea>
                 </div>
+
+                 <div ng-show="lessonsComplete" class="animated fadeInDown finishedPaged">
+
+                     <div>
+                         <h1>Huzzah!</h1>
+
+                         <h3>You've completed Trace's intro to web devevelopment!</h3>
+
+
+
+                         <div class="finishedPageButton" ng-click="restart()"> Everything is awesome!</div>
+
+
+
+
+
+                     </div>
+                 </div>
                 
 
 <div>
@@ -397,12 +451,14 @@
                         function completeLessons(){
 
                             $scope.lessonsComplete = true;
-                            
+
                         }
                         function restart(){
 
                             $scope.lessonsComplete = false;
                             $scope.currentPage = 1;
+
+                            window.location = "https://www.youtube.com/watch?v=dQw4w9WgXcQ&index=2&list=PLZwzJ7X47YGpAoSSwunFg72KalKOpBpGL";
 
                         }
 
