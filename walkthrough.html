@@ -1,137 +1,144 @@
 <html>
-    <head>
-        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
-        
-        <script type="text/javascript" src="https://www.google.com/books/jsapi.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.1/angular.min.js"></script>
-        
-        <meta charset="utf-8"/>
-        <title>Walkthrough App</title>
+<head>
+    <link rel="stylesheet" type="text/css"
+          href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
 
-        <style>
-            .code-snippet{
-                display:block;
-                width:800px;
-                height:250px;
-            }
-            .code-snippet-large{
-                display:block;
-                height:425px;
-                width:800px;
-            }
-            .code-snippet-x-large{
-                display:block;
-                height:550px;
-                width:800px;
-            }
+    <script type="text/javascript" src="https://www.google.com/books/jsapi.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.1/angular.min.js"></script>
+    <script src="https://use.fontawesome.com/c99a731b79.js"></script>
 
-            .page-control{
-                
-                padding:20px;    
-            }
+    <meta charset="utf-8"/>
+    <title>Walkthrough App</title>
 
-            .page-control-button{
-                display:inline-block;
-                width:130px;
-                height:30px;
-                line-height:30px;
-                text-align:center;
-                border: 1px solid lightgray;
-                border-radius: 5px;
-                background-color: white;
-                transition: background-color 1.36s ease;
-            }
-            .page-control-button:hover{
-                background-color:darkslategray;
-                color:white;
-                cursor:pointer;
-            }
-            .page-control-page{
-                display:inline-block;
-                padding-left:10px;
-                padding-right:10px;
-            }
+    <style>
+        .code-snippet {
+            display: block;
+            width: 800px;
+            height: 250px;
+        }
 
-            .finishedPaged{
+        .code-snippet-large {
+            display: block;
+            height: 425px;
+            width: 800px;
+        }
 
-                position:fixed;
-                top:0;
-                left:0;
-                right:0;
-                bottom:0;
-                background-color:beige;
+        .code-snippet-x-large {
+            display: block;
+            height: 550px;
+            width: 800px;
+        }
 
-            }
+        .page-control {
 
-            .finishedPageButton{
-                display:inline-block;
-                height:30px;
-                line-height:30px;
-                text-align:center;
-                border: 1px solid lightgray;
-                border-radius: 5px;
-                background-color: black;
-                color:white;
-                transition: background-color 1.36s ease;
-                padding:0px 10px 0px 10px;
-                cursor:pointer;
-            }
-            .finishedPageButton:hover{
-                background-color:white;
-                color:blue;
+            padding: 20px;
+        }
 
-            }
+        .page-control-button {
+            display: inline-block;
+            width: 130px;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            border: 1px solid lightgray;
+            border-radius: 5px;
+            background-color: white;
+            transition: background-color 1.36s ease;
+        }
 
-        </style>
-    </head>
-    <body ng-app="walkthroughApp">
-        <div ng-controller="myController">
+        .page-control-button:hover {
+            background-color: darkslategray;
+            color: white;
+            cursor: pointer;
+        }
 
-            <div class="page-control">
-                <div class="page-control-button" ng-click="previousLesson()" ng-show="currentPage > 1">Previous</div>
-                <div class="page-control-page">{{currentPage}} / {{maxPages}}</div>
-                <div class="page-control-button" ng-click="nextLesson()" ng-show="currentPage < maxPages">Next</div>
-                <div class="page-control-button" ng-click="completeLessons()" ng-show="currentPage == maxPages">Complete</div>
-            </div>
+        .page-control-page {
+            display: inline-block;
+            padding-left: 10px;
+            padding-right: 10px;
+        }
 
-        <div id="Welcome" ng-show="currentPage == 1" class="animated fadeInLeft">
-            <h1>Welcome!</h1>
-            <h2>Web Dev 101</h2>
-            <br>
-            <h3>It's a whole new world!</h3>
-            <br>
-            <br>
-            <h4>Vocabulary</h4>
-            <ul>
-                <li>HTML</li>
-                <li>CSS</li>
-                <li>Javascript</li>
-                <li>DOM</li>
-                <li>IDE</li>
-                <li>GIT (Version Control)</li>
+        .finishedPaged {
 
-            </ul>
-        </div>
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: beige;
 
-        <div ng-show="currentPage == 2" class="animated fadeInLeft">
-            Download & Install Visual Studio Code
-            <a href="https://code.visualstudio.com" target="_blank">Download</a>
-        </div>
+        }
 
+        .finishedPageButton {
+            display: inline-block;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            border: 1px solid lightgray;
+            border-radius: 5px;
+            background-color: black;
+            color: white;
+            transition: background-color 1.36s ease;
+            padding: 0px 10px 0px 10px;
+            cursor: pointer;
+        }
 
-        <div ng-show="currentPage == 3" class="animated fadeInLeft">
-            Create new folder on your desktop (ex. simple-webapp)
-        </div>
+        .finishedPageButton:hover {
+            background-color: white;
+            color: blue;
 
-        <div ng-show="currentPage == 4" class="animated fadeInLeft">
-            Inside of VS-Code, open to new folder(simple-webapp) and Create new file(ex. my-webapp.html) 
-        </div>
+        }
+
+    </style>
+</head>
+<body ng-app="walkthroughApp">
+<div ng-controller="myController">
+
+    <div class="page-control">
+        <div class="page-control-button" ng-click="previousLesson()" ng-show="currentPage > 1">Previous</div>
+        <div class="page-control-page">{{currentPage}} / {{maxPages}}</div>
+        <div class="page-control-button" ng-click="nextLesson()" ng-show="currentPage < maxPages">Next</div>
+        <div class="page-control-button" ng-click="completeLessons()" ng-show="currentPage == maxPages">Complete</div>
+    </div>
+
+    <div id="Welcome" ng-show="currentPage == 1" class="animated fadeInLeft">
+        <h1>Welcome!</h1>
+        <h2>Web Dev 101</h2>
+        <br>
+        <h3>It's a whole new world!</h3>
+        <br>
+        <br>
+        <h4>Vocabulary</h4>
+        <ul>
+            <li>HTML</li>
+            <li>CSS</li>
+            <li>Javascript</li>
+            <li>DOM</li>
+            <li>IDE</li>
+            <li>GIT (Version Control)</li>
+
+        </ul>
+    </div>
+
+    <div ng-show="currentPage == 2" class="animated fadeInLeft">
+        Download & Install Visual Studio Code
+        <a href="https://code.visualstudio.com" target="_blank">Download</a>
+    </div>
 
 
-        <div ng-show="currentPage == 5" class="animated fadeInLeft">
-            Type...
-            <div>
+    <div ng-show="currentPage == 3" class="animated fadeInLeft">
+        Create new folder on your desktop (ex. simple-webapp)
+    </div>
+
+    <div ng-show="currentPage == 4" class="animated fadeInLeft">
+        Inside of VS-Code, open to new folder(simple-webapp) and Create new file(ex. my-webapp.html)
+    </div>
+
+
+    <div ng-show="currentPage == 5" class="animated fadeInLeft">
+        Type...
+        <div>
                 <textarea class="code-snippet" readonly>
                     
                     <html>
@@ -140,23 +147,23 @@
                         </body>
                     </html>
                 </textarea>
-            </div>
-            
-            <div>
-                Congratulations! You've made your first web page!
-            </div>
-            
         </div>
-        
-        <div ng-show="currentPage == 6" class="animated fadeInLeft">
-            But wait, there's more! 
-        </div>
-        
-        <div ng-show="currentPage == 7" class="animated fadeInLeft">
-            Let's learn about some HTML tags! 
-        
 
-            <div>
+        <div>
+            Congratulations! You've made your first web page!
+        </div>
+
+    </div>
+
+    <div ng-show="currentPage == 6" class="animated fadeInLeft">
+        But wait, there's more!
+    </div>
+
+    <div ng-show="currentPage == 7" class="animated fadeInLeft">
+        Let's learn about some HTML tags!
+
+
+        <div>
         
             <textarea class="code-snippet-large" readonly>
 
@@ -172,7 +179,7 @@
                 
                 <p>This is a paragraph</p>
                 
-                <input />
+                <input/>
                 
                 <a href="google.com"> hyperlink tag</a>
                 <h1>That HREF thing... the one in the 'a' tag above... that's</h1>
@@ -187,41 +194,42 @@
                 </h4>
                 
             </textarea>
-            
-            </div>
-            
-            <div>
-                <div>
-                    stuff
-                </div>
-                
-                <ul>
-                    <li>1</li>
-                    <li>2 : and furthermore</li>
-                    <li>3. Harry Potter and the ...</li>
-                </ul>
-                
-                <p>This is a paragraph</p>
-                
-                <input />
-                
-                <a href="https:www.google.com" target="_blank"> hyperlink tag</a>
-                <h1>That HREF thing... the one in the 'a' tag above... that's</h1>
-                <h2>called an attribute</h2>
-                <h3>we'll go over more of those later</h3>
-                
-                <p>There are also modifier tags like <strong>THIS</strong> </p>
-                
-                <h4>
-                    And many more! <a href="http://www.w3schools.com/html/" target="_blank"> http://www.w3schools.com/html/ </a>
-                </h4>
-            </div>
+
         </div>
-        <div ng-show="currentPage == 8" class="animated fadeInLeft">
-            
-            Let's learn about some CSS! 
-        
-        
+
+        <div>
+            <div>
+                stuff
+            </div>
+
+            <ul>
+                <li>1</li>
+                <li>2 : and furthermore</li>
+                <li>3. Harry Potter and the ...</li>
+            </ul>
+
+            <p>This is a paragraph</p>
+
+            <input/>
+
+            <a href="https:www.google.com" target="_blank"> hyperlink tag</a>
+            <h1>That HREF thing... the one in the 'a' tag above... that's</h1>
+            <h2>called an attribute</h2>
+            <h3>we'll go over more of those later</h3>
+
+            <p>There are also modifier tags like <strong>THIS</strong></p>
+
+            <h4>
+                And many more! <a href="http://www.w3schools.com/html/" target="_blank">
+                http://www.w3schools.com/html/ </a>
+            </h4>
+        </div>
+    </div>
+    <div ng-show="currentPage == 8" class="animated fadeInLeft">
+
+        Let's learn about some CSS!
+
+
         <div>
         
             <textarea class="code-snippet" style="width:800px;" readonly>
@@ -232,52 +240,51 @@
                 The box could be anything... It could even be a boat!
                 </div>
             </textarea>
-        
-        
-        
+
+
         </div>
-        
+
         <div>
             <div style="color:blue; font-size:14px; margin-bottom:10px;">oh, hey man</div>
-            
+
             <div style="text-align:center; background-color:gray; color:pink; padding:10px; border-radius:5px">
                 The box could be anything... It could even be a boat!
             </div>
-            
+
         </div>
-        
+
         <br>
-        
+
         <div>Too many styles on an html tag can get nasty and doesn't help style-reuse...</div>
         <div>What do?</div>
-        
+
 
     </div>
-          <div ng-show="currentPage == 9" class="animated fadeInLeft">
-            Welcome to the stage, The style tag! ([crowd whispers]: so Fresh!) 
-        
-        
+    <div ng-show="currentPage == 9" class="animated fadeInLeft">
+        Welcome to the stage, The style tag! ([crowd whispers]: so Fresh!)
+
+
         <div>
         
             <textarea class="code-snippet-large" style="width:800px;" readonly>
             
                 <style>
-                    .my-styles{
+                    .my-styles {
                         text-align: center;
-                        background-color:rosybrown;
-                        color:beige;
+                        background-color: rosybrown;
+                        color: beige;
                         border: 1px solid brown;
-                        padding:10px;
-                        border-radius:5px;
-                        margin-bottom:10px;
+                        padding: 10px;
+                        border-radius: 5px;
+                        margin-bottom: 10px;
                         transition: background-color 1.29s ease;
                     }
-                           
-                           .my-styles:hover{
-                               cursor:pointer;
-                               background-color:seashell;
-                               color:palevioletred;
-                           }
+
+                    .my-styles:hover {
+                        cursor: pointer;
+                        background-color: seashell;
+                        color: palevioletred;
+                    }
                 </style>
                 
                 <div class="my-styles">
@@ -288,65 +295,63 @@
                 </div>
                 
             </textarea>
-        
-        
-        
+
+
         </div>
-        
+
         <div>
-        <br>
-                       <style>
-                    .my-styles{
-                        text-align: center;
-                        background-color:rosybrown;
-                        color:beige;
-                        border: 1px solid brown;
-                        padding:10px;
-                        border-radius:5px;
-                        margin-bottom:10px;
-                        box-shadow: 3px 3px 5px gray;
-                        transition: background-color 1.29s ease;
-                    }
-                           
-                           .my-styles:hover{
-                               cursor:pointer;
-                               background-color:seashell;
-                               color:palevioletred;
-                           }
-                </style>
-                
-                <div class="my-styles">
-                    The box could be anything... It could even be a boat!
-                </div>
-                <div class="my-styles">
-                    What was that part about reuse?
-                </div>
-                
+            <br>
+            <style>
+                .my-styles {
+                    text-align: center;
+                    background-color: rosybrown;
+                    color: beige;
+                    border: 1px solid brown;
+                    padding: 10px;
+                    border-radius: 5px;
+                    margin-bottom: 10px;
+                    box-shadow: 3px 3px 5px gray;
+                    transition: background-color 1.29s ease;
+                }
+
+                .my-styles:hover {
+                    cursor: pointer;
+                    background-color: seashell;
+                    color: palevioletred;
+                }
+            </style>
+
+            <div class="my-styles" ng-click="boatClicked()">
+                This box could be anything... It could even be a boat!
+                <div ng-show="showBoat" style="font-size:40px; margin-top:10px;"> <i class="fa fa-ship" aria-hidden="true"></i> </div>
+            </div>
+            <div class="my-styles">
+                What was that part about reuse?
+
             </div>
 
-
-       
-
-
         </div>
-        
-             <div ng-show="currentPage == 10" class="animated fadeInLeft">
-                 <div>
-                        So What's all this fuss about Javascript?
-                </div>
 
-                <div>
+
+    </div>
+
+    <div ng-show="currentPage == 10" class="animated fadeInLeft">
+        <div>
+            So What's all this fuss about Javascript?
+        </div>
+
+        <div>
 
                     <textarea class="code-snippet-x-large" style="width:800px;" readonly>
                             
                         <style>
-                            #myButton{
-                                width:130px;
-                                height:30px;
-                                line-height:30px;
-                                text-align:center;
-                                cursor:pointer;
-                                background-color:aqua;
+                            #myButton {
+                                width: 130px;
+                                height: 30px;
+                                line-height: 30px;
+                                text-align: center;
+                                cursor: pointer;
+                                background-color: aqua;
                             }
                         </style>
 
@@ -354,106 +359,107 @@
 
                         <script>
                         
-                            function fireMyClick(){
-                                
-                                var myButton =document.getElementById("myButton");
-                                
-                                if(myButton.style.backgroundColor == "yellow"){
+                            function fireMyClick() {
+
+                                var myButton = document.getElementById("myButton");
+
+                                if (myButton.style.backgroundColor == "yellow") {
                                     myButton.style.backgroundColor = "aqua"
                                     myButton.innerHTML = "I am Groot"
-                                }else{
+                                } else {
                                     myButton.style.backgroundColor = "yellow"
                                     myButton.innerHTML = "I am Batman"
-                                }   
+                                }
                             }
                         </script>
                     </textarea>
-                </div>
+        </div>
 
-                 <div ng-show="lessonsComplete" class="animated fadeInDown finishedPaged">
+        <div ng-show="lessonsComplete" class="animated fadeInDown finishedPaged">
 
-                     <div>
-                         <h1>Huzzah!</h1>
+            <div>
+                <h1>Huzzah!</h1>
 
-                         <h3>You've completed Trace's intro to web devevelopment!</h3>
-
-
-
-                         <div class="finishedPageButton" ng-click="restart()"> Everything is awesome!</div>
+                <h3>You've completed Trace's intro to web devevelopment!</h3>
 
 
+                <div class="finishedPageButton" ng-click="restart()"> Everything is awesome!</div>
 
-
-
-                     </div>
-                 </div>
-                
-
-<div>
-                        <style>
-                            #myButton{
-                                width:130px;
-                                height:30px;
-                                line-height:30px;
-                                text-align:center;
-                                cursor:pointer;
-                                background-color:aqua;
-                            }
-                        </style>
-
-                        <div id="myButton" onclick="fireMyClick()">Click Me Fool!</div>
-
-                        <script>
-                        
-                            function fireMyClick(){
-                                
-                                var myButton =document.getElementById("myButton");
-                                if(myButton.style.backgroundColor == "yellow"){
-                                    myButton.style.backgroundColor = "aqua"
-                                    myButton.innerHTML = "I am Groot"
-                                }else{
-                                    myButton.style.backgroundColor = "yellow"
-                                    myButton.innerHTML = "I am Batman"
-                                }   
-                            }
-                        </script>
-
-</div>
 
             </div>
-        
-        <script>
+        </div>
 
-    (function () {
 
-        angular.module("walkthroughApp", [])
-                .controller("myController", function ($scope) {
-                    var vm = this;
+        <div>
+            <style>
+                #myButton {
+                    width: 130px;
+                    height: 30px;
+                    line-height: 30px;
+                    text-align: center;
+                    cursor: pointer;
+                    background-color: aqua;
+                }
+            </style>
 
-                    $scope.currentPage = 1;
-                    $scope.maxPages = 10;
+            <div id="myButton" onclick="fireMyClick()">Click Me Fool!</div>
 
-                    $scope.nextLesson = nextLesson;
-                    $scope.previousLesson = previousLesson;
-                    $scope.completeLessons = completeLessons;
-                    $scope.restart = restart;
+            <script>
 
-                    $scope.lessonsComplete = false;
+                function fireMyClick() {
 
-                        function nextLesson(){
+                    var myButton = document.getElementById("myButton");
+                    if (myButton.style.backgroundColor == "yellow") {
+                        myButton.style.backgroundColor = "aqua"
+                        myButton.innerHTML = "I am Groot"
+                    } else {
+                        myButton.style.backgroundColor = "yellow"
+                        myButton.innerHTML = "I am Batman"
+                    }
+                }
+            </script>
+
+        </div>
+
+    </div>
+
+    <script>
+
+        (function () {
+
+            angular.module("walkthroughApp", [])
+                    .controller("myController", function ($scope) {
+                        var vm = this;
+
+                        $scope.currentPage = 1;
+                        $scope.maxPages = 10;
+
+                        $scope.nextLesson = nextLesson;
+                        $scope.previousLesson = previousLesson;
+                        $scope.completeLessons = completeLessons;
+                        $scope.restart = restart;
+
+                        $scope.showBoat = false;
+
+                        $scope.boatClicked = function(){ $scope.showBoat = true; };
+
+                        $scope.lessonsComplete = false;
+
+                        function nextLesson() {
                             $scope.currentPage++;
                         }
 
-                        function previousLesson(){
+                        function previousLesson() {
                             $scope.currentPage--;
                         }
 
-                        function completeLessons(){
+                        function completeLessons() {
 
                             $scope.lessonsComplete = true;
 
                         }
-                        function restart(){
+
+                        function restart() {
 
                             $scope.lessonsComplete = false;
                             $scope.currentPage = 1;
@@ -462,19 +468,19 @@
 
                         }
 
-                    init();
-                    function init() {
-                        
-                    }
+                        init();
+                        function init() {
 
-                });
-    })();
+                        }
 
-    $(document).ready(function () {
+                    });
+        })();
 
-    });
-</script>
-        
-        </div>
-    </body>
+        $(document).ready(function () {
+
+        });
+    </script>
+
+</div>
+</body>
 </html>

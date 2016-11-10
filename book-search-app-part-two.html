@@ -10,65 +10,65 @@
 
     <style>
 
-        .app-container{
-            position:fixed;
-            top:0px;
-            bottom:0px;
-            left:0px;
-            right:0px;
+        .app-container {
+            position: fixed;
+            top: 0px;
+            bottom: 0px;
+            left: 0px;
+            right: 0px;
 
         }
 
-        .app-inner-container{
-            height:100%;
-            width:100%;
+        .app-inner-container {
+            height: 100%;
+            width: 100%;
 
         }
 
-        .top-section{
-            position:absolute;
-            top:0px;
-            height:40px;
-            width:100%;
+        .top-section {
+            position: absolute;
+            top: 0px;
+            height: 40px;
+            width: 100%;
 
-            background-color:blanchedalmond;
+            background-color: blanchedalmond;
         }
 
-        .top-section-inner-container{
-
-        }
-
-        .top-section-search-control{
+        .top-section-inner-container {
 
         }
 
-        .side-section{
-            position:absolute;
-            top:40px;
-            bottom:0px;
-            left:0px;
-            width:30%;
-            background-color:firebrick;
-        }
-
-        .books-list-section{
+        .top-section-search-control {
 
         }
 
-        .book-wrapper{
+        .side-section {
+            position: absolute;
+            top: 40px;
+            bottom: 0px;
+            left: 0px;
+            width: 30%;
+            background-color: firebrick;
+        }
+
+        .books-list-section {
 
         }
 
-        .center-section{
-            position:absolute;
-            top:40px;
-            bottom:0px;
-            right:0px;
-            width:70%;
-            background-color:mediumslateblue ;
+        .book-wrapper {
+
         }
 
-        .book-display-section{
+        .center-section {
+            position: absolute;
+            top: 40px;
+            bottom: 0px;
+            right: 0px;
+            width: 70%;
+            background-color: mediumslateblue;
+        }
+
+        .book-display-section {
 
         }
 
@@ -120,8 +120,6 @@
 </html>
 
 
-
-
 <script>
 
     (function () {
@@ -131,7 +129,7 @@
                     $scope.mySearchInput = "";
                     $scope.buttonClicked = ButtonClicked;
 
-                    function ButtonClicked(){
+                    function ButtonClicked() {
 
                         var title = $scope.mySearchInput;
                         GetBooks(title);
@@ -146,10 +144,11 @@
                          */
                     }
 
-                    function GetBooks(title){
+                    function GetBooks(title) {
                         if (!title) {
                             title = "Dune"
-                        };
+                        }
+                        ;
 
                         var url = "https://www.googleapis.com/books/v1/volumes?q=" + title;
 
