@@ -1,0 +1,112 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <style></style>
+  </head>
+
+  <body>
+    <div class="top-section-search-control">
+      <input id="myFirstInput" />
+      <button onclick="myFunction()" id="myButton">search</button>
+    </div>
+
+    <div class="side-section">
+      <div id="books-list-section"></div>
+    </div>
+  </body>
+</html>
+
+<script>
+  var currentBooksList;
+  var currentSelectedBook;
+
+  function myFunction() {
+    var title = document.getElementById('myFirstInput').value;
+    if (title) {
+      return this.myDataCall(title);
+    } else return;
+  }
+
+  function myDataCall(title) {
+    var url = 'https://www.googleapis.com/books/v1/volumes?q=' + title;
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.open('GET', url, false); // false for synchronous request
+    xmlHttp.send(null);
+    var response = JSON.parse(xmlHttp.responseText);
+    console.log(response);
+    var filtered = this.filterData(response);
+    return this.createHTML(filtered);
+  }
+
+  function createHTML(bookdata) {
+    var bookListSection = document.getElementById('books-list-section');
+    var booksWrapperExists = document.getElementById('booksWrapper');
+    var newContainer = document.createElement('DIV');
+
+    if (booksWrapperExists) {
+      booksWrapperExists.remove();
+    }
+
+    newContainer.id = 'booksWrapper';
+    bookListSection.appendChild(newContainer);
+
+    bookdata.forEach((book) => {
+      var newDiv = document.createElement('DIV');
+      newDiv.innerHTML = book.title;
+      newContainer.appendChild(newDiv);
+    });
+  }
+
+  function filterData(rawData) {
+    var newList = [];
+
+    rawData.items.forEach((item) => {
+      var displayLength = 36;
+      var newObj = {};
+      var titleLength = item.volumeInfo.title.length;
+      newObj.title = item.volumeInfo.title ? item.volumeInfo.title : '';
+      newObj.titleDisplay = item.volumeInfo.title
+        ? titleLength >= displayLength
+          ? item.volumeInfo.title.substring(0, displayLength) + ' . . .'
+          : item.volumeInfo.title
+        : '';
+      newObj.description = item.volumeInfo.description ? item.volumeInfo.description : '';
+      newObj.rating = item.volumeInfo.averageRating ? item.volumeInfo.averageRating : '';
+      newObj.ratingsCount = item.volumeInfo.ratingsCount ? item.volumeInfo.ratingsCount : '';
+      newObj.buyLink = item.saleInfo.buyLink;
+
+      newObj.pdf = item.accessInfo.webReaderLink;
+      newObj.hasImages = false;
+      if (item.volumeInfo.imageLinks) {
+        newObj.hasImages =
+          item.volumeInfo.imageLinks.smallThumbnail || item.volumeInfo.imageLinks.thumbnail
+            ? true
+            : false;
+
+        if (item.volumeInfo.imageLinks.smallThumbnail) {
+          newObj.imageLinkSmall = item.volumeInfo.imageLinks.smallThumbnail
+            ? item.volumeInfo.imageLinks.smallThumbnail
+            : '';
+        }
+
+        if (item.volumeInfo.imageLinks.thumbnail) {
+          newObj.imageLinkLarge = item.volumeInfo.imageLinks.thumbnail
+            ? item.volumeInfo.imageLinks.thumbnail
+            : '';
+        }
+      }
+      newObj.pageCount = item.volumeInfo.pageCount ? item.volumeInfo.pageCount : '';
+      newObj.publishedDate = item.volumeInfo.publishedDate ? item.volumeInfo.publishedDate : '';
+      newObj.publisher = item.volumeInfo.publisher ? item.volumeInfo.publisher : '';
+      newObj.isbn = '';
+      if (item.volumeInfo.industryIdentifiers) {
+        var identifier = item.volumeInfo.industryIdentifiers[0].identifier;
+
+        newObj.isbn = 'ISBN:' + identifier;
+      }
+
+      newList.push(newObj);
+    });
+    return newList;
+  }
+</script>
