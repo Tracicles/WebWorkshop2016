@@ -60,7 +60,22 @@
 
     rawData.items.forEach((item) => {
       var displayLength = 36;
-      var newObj = {};
+      var newObj = {
+        title: '',
+        titleDisplay: '',
+        description: '',
+        rating: '',
+        ratingsCount: '',
+        buyLink: '',
+        pdf: '',
+        hasImages: '',
+        imageLinkSmall: '',
+        imageLinkLarge: '',
+        pageCount: '',
+        publishedDate: '',
+        publisher: '',
+        isbn: '',
+      };
       var titleLength = item.volumeInfo.title.length;
       newObj.title = item.volumeInfo.title ? item.volumeInfo.title : '';
       newObj.titleDisplay = item.volumeInfo.title
